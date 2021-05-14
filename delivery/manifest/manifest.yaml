@@ -8,7 +8,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: podtato-main
-  namespace: demospace  
+  namespace: demospace
 spec:
   selector:
     matchLabels:
@@ -20,15 +20,15 @@ spec:
     spec:
       terminationGracePeriodSeconds: 5
       containers:
-      - name: server
-        image:  gdsoumya/podtato-main:v0.1.0
-        imagePullPolicy: Always
-        ports:
-        - containerPort: 9000
-        env:
-        - name: PORT
-          value: "9000"
-                    
+        - name: server
+          image: gdsoumya/podtato-main-js:v0.1.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9000
+          env:
+            - name: PORT
+              value: "9000"
+
 ---
 apiVersion: v1
 kind: Service
@@ -39,10 +39,10 @@ spec:
   selector:
     app: podtato-main
   ports:
-  - name: http
-    port: 9000
-    protocol: TCP
-    targetPort: 9000
+    - name: http
+      port: 9000
+      protocol: TCP
+      targetPort: 9000
   type: LoadBalancer
 
 ---
@@ -63,7 +63,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
         - name: server
-          image:  gdsoumya/podtato-hats:v0.1.0
+          image: gdsoumya/podtato-hats:v0.1.0
           imagePullPolicy: Always
           ports:
             - containerPort: 9000
@@ -105,7 +105,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
         - name: server
-          image:  gdsoumya/podtato-left-leg:v0.1.0
+          image: gdsoumya/podtato-left-leg:v0.1.0
           imagePullPolicy: Always
           ports:
             - containerPort: 9000
@@ -147,7 +147,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
         - name: server
-          image:  gdsoumya/podtato-left-arm:v0.1.0
+          image: gdsoumya/podtato-left-arm:v0.1.0
           imagePullPolicy: Always
           ports:
             - containerPort: 9000
@@ -189,7 +189,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
         - name: server
-          image:  gdsoumya/podtato-right-leg:v0.1.0
+          image: gdsoumya/podtato-right-leg:v0.1.0
           imagePullPolicy: Always
           ports:
             - containerPort: 9000
@@ -231,7 +231,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
         - name: server
-          image:  gdsoumya/podtato-right-arm:v0.1.0
+          image: gdsoumya/podtato-right-arm:v0.1.0
           imagePullPolicy: Always
           ports:
             - containerPort: 9000

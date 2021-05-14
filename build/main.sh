@@ -17,6 +17,13 @@ do
   fi
 
   echo ""
+	echo "--> podtato-head main js"
+  if ! docker build -f podtato-services/podtato-main-js/docker/Dockerfile ./podtato-services/podtato-main-js --build-arg VERSION="${TAG}" --tag "${REPOSITORY}"/podtato-main-js:v"${TAG}"; then
+    echo "podtato-head main js build failed with rc $?"
+    exit 1
+  fi
+
+  echo ""
   echo "--> podtato-head hat"
   if ! docker build -f podtato-services/hats/docker/Dockerfile ./podtato-services/hats --build-arg VERSION="${TAG}" --tag "${REPOSITORY}"/podtato-hats:v"${TAG}"; then
     echo "podtato-head hat build failed with rc $?"
@@ -55,6 +62,7 @@ do
     echo ""
     echo "--> pushing images for tag $TAG"
     (docker push "${REPOSITORY}"/podtato-main:v"${TAG}" && \
+    docker push "${REPOSITORY}"/podtato-main-js:v"${TAG}" && \
     docker push "${REPOSITORY}"/podtato-hats:v"${TAG}" && \
     docker push "${REPOSITORY}"/podtato-left-leg:v"${TAG}" && \
     docker push "${REPOSITORY}"/podtato-left-arm:v"${TAG}" && \
