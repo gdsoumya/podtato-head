@@ -29,9 +29,9 @@ app.get("/parts/:service/:img", async (req, res) => {
             res.set("Content-Type", "image/svg+xml");
             res.send(resp.body);
           } else if (!err) {
-            res.status(500).send("internal server error");
+            res.status(resp.statusCode).send();
           } else {
-            res.status(statusCode).send();
+            res.status(500).send("internal server error");
           }
         }
       );
